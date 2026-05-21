@@ -4,7 +4,7 @@ import { MapPin, Mail, Phone, Briefcase, Server, Code2, Network, ShieldCheck, Da
 export default function About() {
   const contactDetails = [
     { icon: <MapPin size={14} className="text-brand-accent" />, label: "Location", value: "Bengaluru, India" },
-    { icon: <Mail size={14} className="text-brand-accent" />, label: "Email", value: "shashidhar.gowda.p@outlook.com", isLink: true, href: "mailto:shashidhar.gowda.p@outlook.com" },
+    { icon: <Mail size={14} className="text-brand-accent" />, label: "Email", value: "shashidhar.p.0103@gmail.com", isLink: true, href: "mailto:shashidhar.p.0103@gmail.com" },
     { icon: <Phone size={14} className="text-brand-accent" />, label: "Phone", value: "+91 9019884212", isLink: true, href: "tel:+919019884212" },
     { icon: <Briefcase size={14} className="text-brand-accent" />, label: "Status", value: "Open To Work", highlight: true }
   ];
@@ -75,24 +75,27 @@ export default function About() {
               {contactDetails.map((detail, index) => (
                 <div 
                   key={index}
-                  className="p-3.5 bg-[#0F172A] border border-brand-border rounded flex items-center space-x-3"
+                  className={`p-3.5 bg-[#0F172A] border border-brand-border rounded flex items-center space-x-3 min-w-0 ${
+                    detail.label === "Email" ? "sm:col-span-2" : ""
+                  }`}
                 >
-                  <div className="p-2 bg-brand-bg border border-brand-border/60 rounded">
+                  <div className="p-2 bg-brand-bg border border-brand-border/60 rounded flex-shrink-0">
                     {detail.icon}
                   </div>
-                  <div className="text-left">
+                  <div className="text-left min-w-0">
                     <span className="text-[10px] text-brand-secondary uppercase font-mono block tracking-wider">
                       {detail.label}
                     </span>
                     {detail.isLink ? (
                       <a 
                         href={detail.href} 
-                        className="text-xs text-brand-primary font-medium hover:text-brand-accent hover:underline font-mono"
+                        className="text-xs text-brand-primary font-medium hover:text-brand-accent hover:underline font-mono block truncate"
+                        title={detail.value}
                       >
                         {detail.value}
                       </a>
                     ) : (
-                      <span className={`text-xs font-mono font-medium ${
+                      <span className={`text-xs font-mono font-medium block truncate ${
                         detail.highlight 
                           ? "text-[#10B981] font-bold" 
                           : "text-brand-primary"

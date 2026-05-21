@@ -112,7 +112,7 @@ export default function Certifications() {
                   className="bg-[#0F172A] border border-brand-accent/40 hover:border-brand-accent rounded-lg p-6 sm:p-7 flex flex-col sm:flex-row gap-6 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)] transition-all duration-300 group cursor-zoom-in text-left select-none"
                 >
                   {/* Image container */}
-                  <div className="relative w-full sm:w-48 h-36 flex-shrink-0 bg-brand-bg border border-brand-border rounded overflow-hidden select-none">
+                  <div className="relative w-full sm:w-72 sm:h-48 h-52 flex-shrink-0 bg-brand-bg border border-brand-border rounded overflow-hidden select-none">
                     <img 
                       src={cert.image} 
                       alt={cert.title} 
