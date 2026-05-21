@@ -135,7 +135,7 @@ export default function Hero() {
                 <LinkedinIcon className="w-[16px] h-[16px]" />
               </a>
               <a 
-                href="mailto:shashidhar.gowda.p@outlook.com" 
+                href="mailto:shashidhar.p.0103@gmail.com" 
                 className="p-2 border border-brand-border text-brand-secondary hover:text-brand-accent hover:border-brand-accent transition-all duration-300"
                 aria-label="Email Address"
               >

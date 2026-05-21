@@ -40,10 +40,6 @@ export default function Terminal() {
     inputRef.current?.focus();
   };
 
-  useEffect(() => {
-    focusInput();
-  }, []);
-
   const handleCommand = (cmdText: string) => {
     const trimmed = cmdText.trim().toLowerCase();
     let response: React.ReactNode = null;
@@ -144,7 +140,7 @@ export default function Terminal() {
       case "contact":
         response = (
           <div className="space-y-1 text-xs font-mono">
-            <p><span className="text-brand-secondary">Email:</span> <a href="mailto:shashidhar.gowda.p@outlook.com" className="text-brand-accent hover:underline">shashidhar.gowda.p@outlook.com</a></p>
+            <p><span className="text-brand-secondary">Email:</span> <a href="mailto:shashidhar.p.0103@gmail.com" className="text-brand-accent hover:underline">shashidhar.p.0103@gmail.com</a></p>
             <p><span className="text-brand-secondary">LinkedIn:</span> <a href="https://www.linkedin.com/in/shashidhar-gowda-p" target="_blank" rel="noreferrer" className="text-brand-accent hover:underline">linkedin.com/in/shashidhar-gowda-p</a></p>
             <p><span className="text-brand-secondary">GitHub:</span> <a href="https://github.com/p-shashidhar-gowda" target="_blank" rel="noreferrer" className="text-brand-accent hover:underline">github.com/p-shashidhar-gowda</a></p>
             <p><span className="text-brand-secondary">Phone:</span> <a href="tel:+919019884212" className="text-brand-accent hover:underline">+91 9019884212</a></p>

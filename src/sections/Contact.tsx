@@ -1,6 +1,6 @@
+import { useState } from "react";
 import type { SVGProps } from "react";
 import SectionHeader from "../components/SectionHeader";
-import RecruiterForm from "../components/RecruiterForm";
 import { Mail, Phone, Terminal as TerminalIcon, Shield } from "lucide-react";
 
 const GithubIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -35,12 +35,20 @@ const LinkedinIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("shashidhar.p.0103@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const contactLinks = [
     {
       icon: <Mail size={16} className="text-brand-accent" />,
       label: "Email",
-      value: "shashidhar.gowda.p@outlook.com",
-      href: "mailto:shashidhar.gowda.p@outlook.com"
+      value: "shashidhar.p.0103@gmail.com",
+      href: "mailto:shashidhar.p.0103@gmail.com"
     },
     {
       icon: <LinkedinIcon className="w-[16px] h-[16px] text-brand-accent" />,
@@ -73,7 +81,7 @@ export default function Contact() {
           number="05" 
           category="CONNECT" 
           title="Establish Communication" 
-          subtitle="I'm open to discussing full-time opportunities, internship contracts, or DevOps projects. Drop a message below to test our SMTP delivery pipeline!"
+          subtitle="I'm open to discussing full-time opportunities, internship contracts, or DevOps projects. Reach out via any of my direct coordinates!"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
@@ -120,9 +128,60 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Side: Message Form */}
-          <div className="lg:col-span-7">
-            <RecruiterForm />
+          {/* Right Side: Operational Coordinates Dashboard */}
+          <div className="lg:col-span-7 bg-[#0F172A] border border-brand-border rounded-lg p-6 sm:p-8 space-y-6 text-left">
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-brand-primary tracking-wide flex items-center gap-2.5 select-none">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981]"></span>
+                </span>
+                Operational Status: OPEN FOR WORK
+              </h3>
+              <p className="text-xs text-brand-secondary leading-relaxed">
+                Currently open to Cloud &amp; DevOps Engineering roles, infrastructure trainee contracts, or security automation consulting. Access my validated coordinates below to fast-track recruitment.
+              </p>
+            </div>
+
+            {/* Coordinates Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-[11px] select-none">
+              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
+                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Current Base</span>
+                <span className="text-brand-primary font-semibold">Bengaluru, KA, India</span>
+              </div>
+              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
+                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Primary Role Class</span>
+                <span className="text-brand-accent font-semibold">Cloud &amp; DevOps Engineer</span>
+              </div>
+              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
+                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Cloud Specialization</span>
+                <span className="text-[#10B981] font-semibold">Azure Administration</span>
+              </div>
+              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
+                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Notice Period</span>
+                <span className="text-brand-primary font-semibold">Immediate Availability</span>
+              </div>
+            </div>
+
+            {/* Premium CTA Actions */}
+            <div className="pt-4 flex flex-col sm:flex-row gap-4 select-none">
+              {/* Copy coordinates */}
+              <button 
+                onClick={handleCopy}
+                className="flex-1 px-5 py-3 border border-brand-accent text-brand-accent hover:bg-brand-accent/10 transition-colors uppercase font-mono text-xs tracking-wider font-bold rounded-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
+              >
+                {copied ? "✓ EMAIL COPIED" : "COPY EMAIL ADDRESS"}
+              </button>
+
+              {/* View/Download Resume */}
+              <a 
+                href="Shashidhar_Cloud_Engineer.pdf" 
+                download
+                className="flex-grow px-5 py-3 bg-brand-accent hover:bg-brand-accent/95 text-brand-bg font-bold uppercase tracking-wider text-xs font-mono text-center flex items-center justify-center gap-2"
+              >
+                DOWNLOAD RESUME (PDF) &darr;
+              </a>
+            </div>
           </div>
 
         </div>

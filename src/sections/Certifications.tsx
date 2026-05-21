@@ -109,35 +109,35 @@ export default function Certifications() {
                 <div 
                   key={cert.id}
                   onClick={() => setLightboxIndex(fullIndex)}
-                  className="bg-[#0F172A] border border-brand-accent/30 hover:border-brand-accent rounded-lg p-5 flex flex-col sm:flex-row gap-5 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300 group cursor-zoom-in text-left select-none"
+                  className="bg-[#0F172A] border border-brand-accent/40 hover:border-brand-accent rounded-lg p-6 sm:p-7 flex flex-col sm:flex-row gap-6 hover:shadow-[0_0_25px_rgba(6,182,212,0.2)] transition-all duration-300 group cursor-zoom-in text-left select-none"
                 >
                   {/* Image container */}
-                  <div className="relative w-full sm:w-36 h-28 flex-shrink-0 bg-brand-bg border border-brand-border rounded overflow-hidden select-none">
+                  <div className="relative w-full sm:w-48 h-36 flex-shrink-0 bg-brand-bg border border-brand-border rounded overflow-hidden select-none">
                     <img 
                       src={cert.image} 
                       alt={cert.title} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-[#0B0F19]/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <ZoomIn className="text-brand-accent w-6 h-6" />
+                      <ZoomIn className="text-brand-accent w-7 h-7" />
                     </div>
                   </div>
 
                   {/* Info details */}
-                  <div className="flex flex-col justify-between flex-grow space-y-3">
-                    <div className="space-y-1.5">
-                      <span className="px-2 py-0.5 bg-brand-accent/10 border border-brand-accent/30 text-brand-accent font-mono text-[9px] font-semibold uppercase tracking-wider rounded-sm">
+                  <div className="flex flex-col justify-between flex-grow space-y-4">
+                    <div className="space-y-2">
+                      <span className="px-2.5 py-1 bg-brand-accent/15 border border-brand-accent/40 text-brand-accent font-mono text-[10px] font-semibold uppercase tracking-wider rounded-sm">
                         {cert.tag}
                       </span>
-                      <h4 className="text-sm font-bold text-brand-primary tracking-wide leading-tight group-hover:text-brand-accent transition-colors select-text">
+                      <h4 className="text-base sm:text-lg font-bold text-brand-primary tracking-wide leading-tight group-hover:text-brand-accent transition-colors select-text">
                         {cert.title}
                       </h4>
-                      <p className="text-xs text-brand-secondary select-text">
+                      <p className="text-xs sm:text-sm text-brand-secondary select-text">
                         {cert.issuer}
                       </p>
                     </div>
-                    <span className="text-[10px] text-brand-secondary font-mono block">
-                      Issued: {cert.year} · Verified
+                    <span className="text-xs text-brand-secondary font-mono block">
+                      Issued: {cert.year} · Verified Credentials
                     </span>
                   </div>
                 </div>
