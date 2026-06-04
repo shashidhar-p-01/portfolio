@@ -1,37 +1,16 @@
 interface SectionHeaderProps {
-  number: string;
-  category: string;
   title: string;
   subtitle?: string;
+  align?: 'center' | 'left';
 }
 
-export default function SectionHeader({
-  number,
-  category,
-  title,
-  subtitle
-}: SectionHeaderProps) {
+export default function SectionHeader({ title, subtitle, align = 'center' }: SectionHeaderProps) {
   return (
-    <div className="text-left mb-10 select-none">
-      {/* Small Eyebrow Label */}
-      <div className="flex items-center space-x-3 mb-2">
-        <span className="h-[1px] w-8 bg-brand-accent shadow-[0_0_8px_rgba(6,182,212,0.6)]" />
-        <span className="text-[10px] sm:text-xs font-mono tracking-widest text-brand-accent uppercase font-semibold">
-          {number} / {category}
-        </span>
-      </div>
-
-      {/* Main Title */}
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-primary tracking-tight">
-        {title}
+    <div className={`mb-14 ${align === 'center' ? 'text-center' : 'text-left'}`}>
+      <h2 className="section-heading">
+        <span className="gradient-text">{title}</span>
       </h2>
-
-      {/* Optional Description */}
-      {subtitle && (
-        <p className="text-xs sm:text-sm text-brand-secondary mt-2 max-w-2xl leading-relaxed">
-          {subtitle}
-        </p>
-      )}
+      {subtitle && <p className="section-subheading">{subtitle}</p>}
     </div>
   );
 }

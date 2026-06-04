@@ -1,134 +1,149 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-
-interface NavbarProps {
-  activeSection: string;
-}
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Internships", href: "#experience" },
-  { name: "Skills", href: "#skills" },
-  { name: "Certifications", href: "#certifications" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" }
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Certifications', href: '#certifications' },
+  { label: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar({ activeSection }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
-  // Monitor scroll progress
   useEffect(() => {
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress((window.scrollY / totalScroll) * 100);
+      setIsScrolled(window.scrollY > 20);
+
+      const sections = navLinks.map((l) => l.href.slice(1));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            setActiveSection(sections[i]);
+            break;
+          }
+        }
       }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollTo = useCallback((href: string) => {
+    setIsMobileOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B0F19]/90 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
-      {/* Scroll Progress Line */}
-      <div 
-        className="h-[2px] bg-brand-accent transition-all duration-100 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo / Brand */}
-          <a href="#home" className="flex items-center space-x-3 group">
-            <img 
-              src="https://github.com/p-shashidhar-gowda.png" 
-              alt="Shashidhar Gowda P" 
-              className="w-8 h-8 rounded-full border border-brand-border group-hover:border-brand-accent transition-colors duration-300"
-            />
-            <span className="font-mono text-sm tracking-widest text-brand-primary font-semibold flex items-center gap-1.5">
-              SHASHIDHAR <span className="text-brand-accent">GOWDA</span>
-            </span>
-          </a>
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'glass-strong shadow-lg shadow-black/10'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-18">
+            <button
+              onClick={() => scrollTo('#home')}
+              className="flex items-center gap-2 group"
+            >
+              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-azure-500 to-brand-purple flex items-center justify-center text-white font-bold text-lg">
+                S
+              </div>
+              <span className="font-bold text-lg text-brand-primary group-hover:text-azure-400 transition-colors hidden sm:block">
+                Shashidhar
+              </span>
+            </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`px-3 py-2 text-xs font-mono tracking-wider transition-all duration-200 relative ${
-                    isActive 
-                      ? "text-brand-accent" 
-                      : "text-brand-secondary hover:text-brand-primary"
+            <div className="hidden md:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => scrollTo(link.href)}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-azure-400'
+                      : 'text-brand-secondary hover:text-brand-primary'
                   }`}
                 >
-                  {link.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[1px] bg-brand-accent shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                  {link.label}
+                  {activeSection === link.href.slice(1) && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute bottom-0 left-3 right-3 h-0.5 bg-azure-500 rounded-full"
+                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    />
                   )}
-                </a>
-              );
-            })}
-            
-            {/* Quick Console CTA */}
-            <a
-              href="#contact"
-              className="ml-4 px-4 py-1.5 rounded-none border border-brand-accent/50 text-brand-accent hover:bg-brand-accent/10 transition-all duration-300 font-mono text-[11px] uppercase tracking-wider"
-            >
-              Get In Touch
-            </a>
-          </div>
+                </button>
+              ))}
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-none text-brand-secondary hover:text-brand-primary hover:bg-[#0F172A] focus:outline-none"
-              aria-expanded={isOpen}
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden p-2 text-brand-secondary hover:text-brand-primary transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
-      </div>
+      </motion.nav>
 
-      {/* Mobile Menu Panel */}
-      {isOpen && (
-        <div className="md:hidden bg-[#0B0F19]/95 border-b border-brand-border px-4 pt-2 pb-6 space-y-1 sm:px-3">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`block px-3 py-3 rounded-none font-mono text-sm tracking-wider border-l-2 transition-all ${
-                  isActive
-                    ? "border-brand-accent text-brand-accent bg-[#0F172A]/50"
-                    : "border-transparent text-brand-secondary hover:text-brand-primary hover:bg-[#0F172A]/20"
-                }`}
-              >
-                {link.name}
-              </a>
-            );
-          })}
-          <div className="pt-4 px-3">
-            <a
-              href="#contact"
-              onClick={() => setIsOpen(false)}
-              className="block w-full text-center py-2.5 rounded-none border border-brand-accent text-brand-accent font-mono text-xs uppercase tracking-wider hover:bg-brand-accent/10 transition-all"
+      <AnimatePresence>
+        {isMobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 pt-16 md:hidden"
+          >
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsMobileOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="relative mx-4 mt-2 p-4 glass-strong rounded-2xl"
             >
-              Get In Touch
-            </a>
-          </div>
-        </div>
-      )}
-    </nav>
+              {navLinks.map((link, i) => (
+                <motion.button
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => scrollTo(link.href)}
+                  className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-azure-400 bg-azure-500/10'
+                      : 'text-brand-secondary hover:text-brand-primary hover:bg-white/5'
+                  }`}
+                >
+                  {link.label}
+                </motion.button>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

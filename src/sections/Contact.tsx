@@ -1,234 +1,95 @@
-import { useState } from "react";
-import type { SVGProps } from "react";
-import SectionHeader from "../components/SectionHeader";
-import { Mail, Phone, Terminal as TerminalIcon, Shield } from "lucide-react";
+import { useState, useRef, type FormEvent } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Mail, MapPin, Send } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../components/Icons';
+import SectionWrapper from '../components/SectionWrapper';
+import SectionHeader from '../components/SectionHeader';
 
-const GithubIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    {...props}
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
+const contactInfo = [
+  { icon: Mail, label: 'Email', value: 'shashidhar.gowda.p@outlook.com', href: 'mailto:shashidhar.gowda.p@outlook.com' },
+  { icon: MapPin, label: 'Location', value: 'Bengaluru, Karnataka', href: undefined },
+];
 
-const LinkedinIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    {...props}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+const socialLinks = [
+  { icon: GithubIcon, label: 'GitHub', href: 'https://github.com/shashidhar-p-01' },
+  { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/shashidhar-gowda-p' },
+  { icon: Mail, label: 'Email', href: 'mailto:shashidhar.gowda.p@outlook.com' },
+];
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("shashidhar.p.0103@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const mailtoLink = `mailto:shashidhar.gowda.p@outlook.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
+    window.open(mailtoLink, '_blank');
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
   };
 
-  const contactLinks = [
-    {
-      icon: <Mail size={16} className="text-brand-accent" />,
-      label: "Email",
-      value: "shashidhar.p.0103@gmail.com",
-      href: "mailto:shashidhar.p.0103@gmail.com"
-    },
-    {
-      icon: <LinkedinIcon className="w-[16px] h-[16px] text-brand-accent" />,
-      label: "LinkedIn",
-      value: "linkedin.com/in/shashidhar-gowda-p",
-      href: "https://www.linkedin.com/in/shashidhar-gowda-p"
-    },
-    {
-      icon: <GithubIcon className="w-[16px] h-[16px] text-brand-accent" />,
-      label: "GitHub",
-      value: "github.com/p-shashidhar-gowda",
-      href: "https://github.com/p-shashidhar-gowda"
-    },
-    {
-      icon: <Phone size={16} className="text-brand-accent" />,
-      label: "Phone",
-      value: "+91 9019884212",
-      href: "tel:+919019884212"
-    }
-  ];
-
   return (
-    <section id="contact" className="pt-20 pb-0 border-b-0 bg-[#0B0F19] flex flex-col min-h-screen justify-between relative overflow-hidden">
-      
-      {/* Contact Main Info */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow">
-        
-        {/* Section Title */}
-        <SectionHeader 
-          number="05" 
-          category="CONNECT" 
-          title="Establish Communication" 
-          subtitle="I'm open to discussing full-time opportunities, internship contracts, or DevOps projects. Reach out via any of my direct coordinates!"
-        />
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
-          
-          {/* Left Side: Contact Cards */}
-          <div className="lg:col-span-5 text-left space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-brand-primary tracking-wide">
-                Direct Channels
-              </h3>
-              <p className="text-xs text-brand-secondary leading-relaxed max-w-sm">
-                Feel free to email me directly or reach out on social networks. As a DevOps engineer, I keep my communications optimized and responsive.
-              </p>
-            </div>
-
-            {/* Link grid */}
-            <div className="space-y-3 select-none">
-              {contactLinks.map((link, idx) => (
-                <a 
-                  key={idx}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                  className="flex items-center justify-between p-4 bg-[#0F172A] border border-brand-border hover:border-brand-accent/40 rounded transition-all duration-300 group cursor-pointer"
-                >
-                  <div className="flex items-center space-x-3.5">
-                    <div className="p-2 bg-brand-bg border border-brand-border/60 rounded group-hover:border-brand-accent/25 transition-colors">
-                      {link.icon}
-                    </div>
-                    <div className="text-left">
-                      <span className="text-[9px] uppercase font-mono tracking-wider text-brand-secondary block">
-                        {link.label}
-                      </span>
-                      <span className="text-xs font-mono font-medium text-brand-primary group-hover:text-brand-accent transition-colors select-all">
-                        {link.value}
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono text-brand-secondary group-hover:text-brand-accent tracking-widest pl-2">
-                    CONNECT &rarr;
-                  </span>
+    <SectionWrapper id="contact">
+      <SectionHeader title="Get In Touch" subtitle="Let's connect and discuss opportunities" />
+      <div ref={ref} className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }} className="space-y-8">
+          <div className="space-y-4">
+            {contactInfo.map((item) => (
+              <div key={item.label} className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-azure-500/10 flex items-center justify-center flex-shrink-0">
+                  <item.icon size={20} className="text-azure-400" />
+                </div>
+                <div>
+                  <p className="text-xs text-brand-muted font-medium uppercase tracking-wider">{item.label}</p>
+                  {item.href ? (
+                    <a href={item.href} className="text-brand-primary hover:text-azure-400 transition-colors font-medium text-sm">{item.value}</a>
+                  ) : (
+                    <p className="text-brand-primary font-medium text-sm">{item.value}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div>
+            <p className="text-sm font-medium text-brand-secondary mb-4">Connect with me</p>
+            <div className="flex gap-3">
+              {socialLinks.map((link) => (
+                <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-xl glass flex items-center justify-center text-brand-secondary hover:text-azure-400 hover:border-azure-500/40 transition-all" aria-label={link.label}>
+                  <link.icon size={18} />
                 </a>
               ))}
             </div>
           </div>
+        </motion.div>
 
-          {/* Right Side: Operational Coordinates Dashboard */}
-          <div className="lg:col-span-7 bg-[#0F172A] border border-brand-border rounded-lg p-6 sm:p-8 space-y-6 text-left">
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-brand-primary tracking-wide flex items-center gap-2.5 select-none">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981]"></span>
-                </span>
-                Operational Status: OPEN FOR WORK
-              </h3>
-              <p className="text-xs text-brand-secondary leading-relaxed">
-                Currently open to Cloud &amp; DevOps Engineering roles, infrastructure trainee contracts, or security automation consulting. Access my validated coordinates below to fast-track recruitment.
-              </p>
-            </div>
-
-            {/* Coordinates Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-[11px] select-none">
-              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
-                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Current Base</span>
-                <span className="text-brand-primary font-semibold">Bengaluru, KA, India</span>
-              </div>
-              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
-                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Primary Role Class</span>
-                <span className="text-brand-accent font-semibold">Cloud &amp; DevOps Engineer</span>
-              </div>
-              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
-                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Cloud Specialization</span>
-                <span className="text-[#10B981] font-semibold">Azure Administration</span>
-              </div>
-              <div className="p-3.5 bg-brand-bg border border-brand-border rounded">
-                <span className="text-brand-secondary uppercase text-[9px] block mb-1">Notice Period</span>
-                <span className="text-brand-primary font-semibold">Immediate Availability</span>
-              </div>
-            </div>
-
-            {/* Premium CTA Actions */}
-            <div className="pt-4 flex flex-col sm:flex-row gap-4 select-none">
-              {/* Copy coordinates */}
-              <button 
-                onClick={handleCopy}
-                className="flex-1 px-5 py-3 border border-brand-accent text-brand-accent hover:bg-brand-accent/10 transition-colors uppercase font-mono text-xs tracking-wider font-bold rounded-none flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
-              >
-                {copied ? "✓ EMAIL COPIED" : "COPY EMAIL ADDRESS"}
-              </button>
-
-              {/* View/Download Resume */}
-              <a 
-                href="Shashidhar_Cloud_Engineer.pdf" 
-                download
-                className="flex-grow px-5 py-3 bg-brand-accent hover:bg-brand-accent/95 text-brand-bg font-bold uppercase tracking-wider text-xs font-mono text-center flex items-center justify-center gap-2"
-              >
-                DOWNLOAD RESUME (PDF) &darr;
-              </a>
-            </div>
+        <motion.form initial={{ opacity: 0, x: 30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.2, duration: 0.6 }} onSubmit={handleSubmit} className="glass rounded-2xl p-6 md:p-8 space-y-5">
+          <div>
+            <label htmlFor="contact-name" className="block text-sm font-medium text-brand-secondary mb-2">Name</label>
+            <input id="contact-name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-brand-bg/80 border border-brand-border focus:border-azure-500/50 focus:outline-none focus:ring-1 focus:ring-azure-500/30 text-brand-primary placeholder-brand-muted text-sm transition-all" placeholder="Your name" />
           </div>
-
-        </div>
+          <div>
+            <label htmlFor="contact-email" className="block text-sm font-medium text-brand-secondary mb-2">Email</label>
+            <input id="contact-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-brand-bg/80 border border-brand-border focus:border-azure-500/50 focus:outline-none focus:ring-1 focus:ring-azure-500/30 text-brand-primary placeholder-brand-muted text-sm transition-all" placeholder="your@email.com" />
+          </div>
+          <div>
+            <label htmlFor="contact-message" className="block text-sm font-medium text-brand-secondary mb-2">Message</label>
+            <textarea id="contact-message" required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-brand-bg/80 border border-brand-border focus:border-azure-500/50 focus:outline-none focus:ring-1 focus:ring-azure-500/30 text-brand-primary placeholder-brand-muted text-sm transition-all resize-none" placeholder="Your message..." />
+          </div>
+          <button type="submit" className="btn-primary w-full justify-center" disabled={submitted}>
+            {submitted ? (<><CheckIcon /> Message Sent!</>) : (<><Send size={18} /> Send Message</>)}
+          </button>
+        </motion.form>
       </div>
+    </SectionWrapper>
+  );
+}
 
-      {/* Terminal-Inspired Footer */}
-      <footer className="w-full bg-[#0F172A] border-t border-brand-border mt-20 py-8 font-mono select-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          
-          {/* CLI Stats Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] text-brand-secondary border-b border-brand-border/40 pb-4">
-            <div className="flex items-center space-x-3">
-              <span className="text-[#10B981] font-semibold flex items-center gap-1">
-                <TerminalIcon size={12} className="text-brand-accent" /> shashidhar@devops-portfolio:~$
-              </span>
-              <span className="text-brand-primary">uptime</span>
-              <span className="text-brand-border">|</span>
-              <span className="text-brand-secondary">system_status: STABLE</span>
-              <span className="text-brand-border">|</span>
-              <span className="text-brand-secondary">shell: /bin/zsh</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <span className="text-[#10B981] flex items-center gap-1"><Shield size={11} className="text-[#10B981]" /> SSL Encrypted</span>
-              <span className="text-brand-border">|</span>
-              <span>Lighthouse score: 100</span>
-            </div>
-          </div>
-
-          {/* Traditional copyright */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-            <div className="text-left">
-              <p className="text-brand-primary font-bold tracking-wider">
-                SHASHIDHAR GOWDA P
-              </p>
-              <p className="text-[10px] text-brand-secondary mt-1">
-                Cloud &amp; DevOps Engineering Portfolio · Built originally in 2026.
-              </p>
-            </div>
-
-            <p className="text-[10px] text-brand-secondary">
-              &copy; 2026 P. Shashidhar Gowda. All Rights Reserved. Configured for GitHub Pages.
-            </p>
-          </div>
-
-        </div>
-      </footer>
-
-    </section>
+function CheckIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
   );
 }
