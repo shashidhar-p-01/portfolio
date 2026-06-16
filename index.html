@@ -43,7 +43,7 @@
     @keyframes drift { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(48px,-38px) scale(1.07)} 66%{transform:translate(-28px,44px) scale(0.95)} 100%{transform:translate(34px,24px) scale(1.05)} }
 
     .nav-outer { position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;background:rgba(200,218,234,0.30);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px); }
-    nav { display:flex;align-items:center;justify-content:space-between;background:var(--glass-nav-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-nav-bdr);border-radius:60px;padding:10px 10px 10px 28px;box-shadow:var(--shadow-soft),inset 0 1px 0 rgba(255,255,255,0.55);max-width:1100px;margin:0 auto;gap:20px; }
+    nav { display:flex;align-items:center;justify-content:space-between;background:var(--glass-nav-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-nav-bdr);border-radius:60px;padding:10px 10px 10px 28px;box-shadow:var(--shadow-soft),inset 0 1px 0 rgba(255,255,255,0.55);max-width:1400px;margin:0 auto;gap:20px; }
     #nav-brand { font-size:16.5px;font-weight:600;color:var(--text-primary);letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;text-decoration:none; }
     #nav-links { display:flex;align-items:center;flex:1;justify-content:center; }
     #nav-links ul { list-style:none;display:flex;gap:2px; }
@@ -89,7 +89,8 @@
 
     #fixed-heading.intro-mode {
       top: calc(var(--nav-h) + 36px);
-      left: max(28px, calc(50% - 452px));
+      /* Align with inner text of .intro-card: 48px (inner padding) + 52px (card padding) */
+      left: max(100px, calc(50% - 600px));
       transform: translate(0, 0);
       text-align: left;
     }
@@ -119,7 +120,7 @@
       overflow-y: auto;
       padding: calc(var(--nav-h) + 36px + var(--h-small) * 1.2 + 32px) 0 60px;
     }
-    .intro-inner { max-width: 960px; margin: 0 auto; width: 100%; padding: 0 28px; }
+    .intro-inner { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 48px; }
     .intro-card {
       background: var(--glass-card-bg);
       backdrop-filter: var(--glass-blur);
@@ -157,7 +158,7 @@
     #section-experience::-webkit-scrollbar-thumb { background: rgba(20,20,42,0.15); border-radius: 3px; }
     #section-experience::-webkit-scrollbar-thumb:hover { background: rgba(20,20,42,0.25); }
 
-    .exp-inner { max-width: 960px; margin: 0 auto; width: 100%; padding: 0 28px; }
+    .exp-inner { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 48px; }
     .exp-title {
       font-size: clamp(32px, 4.5vw, 56px);
       font-weight: 300;
@@ -255,7 +256,7 @@
     #section-projects::-webkit-scrollbar-thumb { background: rgba(20,20,42,0.15); border-radius: 3px; }
 
     .proj-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%; padding: 0 28px;
+      max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 48px;
       display: grid;
       grid-template-columns: 1fr 340px;
       grid-template-rows: auto 1fr;
@@ -438,7 +439,7 @@
     #section-certifications::-webkit-scrollbar-track { background: transparent; }
     #section-certifications::-webkit-scrollbar-thumb { background: rgba(20,20,42,0.15); border-radius: 3px; }
 
-    .cert-inner { max-width: 960px; margin: 0 auto; width: 100%; padding: 0 28px; }
+    .cert-inner { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 48px; }
     .cert-title {
       font-size: clamp(32px, 4.5vw, 56px);
       font-weight: 300;
@@ -449,69 +450,81 @@
     }
     .cert-title strong { font-weight: 700; }
 
-    /* Certifications — horizontal card layout */
+    /* Certifications — card layout */
     .cert-grid {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-    .cert-row {
-      display: grid;
-      gap: 20px;
-    }
+    .cert-row { display: grid; gap: 20px; }
     .cert-row.row-2 { grid-template-columns: 1fr 1fr; }
     .cert-row.row-3 { grid-template-columns: 1fr 1fr 1fr; }
 
     .cert-item {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 20px;
+      flex-direction: column;
       background: var(--glass-card-bg);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-card-bdr);
       border-radius: 20px;
-      padding: 18px 20px;
+      overflow: hidden;
       box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
       cursor: pointer;
       transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
     .cert-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.60);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.65);
     }
 
+    /* image area — large and prominent, full image no crop */
     .cert-image {
-      width: 60px;
-      height: 60px;
-      flex-shrink: 0;
-      background: rgba(255,255,255,0.38);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.50);
-      border-radius: 14px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.55);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-secondary);
-      font-size: 11px;
-      text-align: center;
-      padding: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.60);
       overflow: hidden;
+      border-bottom: 1px solid var(--glass-card-bdr);
     }
     .cert-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 8px;
+      display: block;
+      transition: transform 0.35s ease;
     }
-    .cert-text { min-width: 0; flex: 1; }
-    .cert-name { font-size: 13.5px; font-weight: 600; color: var(--text-primary); line-height: 1.4; margin-bottom: 4px; }
-    .cert-org  { font-size: 12px; color: var(--text-secondary); }
+    .cert-item:hover .cert-image img { transform: scale(1.02); }
+    .cert-image .cert-placeholder {
+      font-size: 36px;
+      opacity: 0.5;
+    }
 
-    @media (max-width: 700px) {
+    /* text area below the image */
+    .cert-text {
+      padding: 16px 18px 18px;
+      flex: 1;
+    }
+    .cert-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+    .cert-org {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    @media (max-width: 860px) {
+      .cert-row.row-2 { grid-template-columns: 1fr 1fr; }
+      .cert-row.row-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
       .cert-row.row-2,
       .cert-row.row-3 { grid-template-columns: 1fr; }
     }
@@ -553,6 +566,143 @@
     }
     .intro-block-value { color: var(--text-secondary); }
 
+    /* ─── SOCIAL DOCK — slide-left dial ────────────────────────────── */
+    #social-dock {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 190;
+      width: 220px;               /* fixed so expansion doesn’t shift siblings */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;      /* all buttons anchor to the right edge */
+      gap: 10px;
+      transition: transform 0.75s cubic-bezier(0.77,0,0.175,1), opacity 0.55s ease;
+    }
+    #social-dock.contact-mode {
+      transform: translateY(-50%) translateX(260px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    /* Each button expands leftward from the right edge */
+    .s-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;  /* content anchors to left so icon travels left */
+      height: 44px;
+      width: 44px;                /* collapsed = circle */
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--glass-card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-card-bdr);
+      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      text-decoration: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: width 0.40s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0.22s, box-shadow 0.22s;
+    }
+    .s-btn:hover {
+      width: 220px;               /* expanded = pill showing the label */
+      background: rgba(255,255,255,0.50);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.70);
+    }
+    /* Icon always on the right */
+    .s-icon-wrap {
+      width: 44px;
+      min-width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .s-icon-wrap svg { width: 18px; height: 18px; }
+    /* Label slides in from the left as pill expands */
+    .s-label {
+      flex: 1;
+      padding: 0 18px 0 4px;
+      font-size: 12.5px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.18s 0.14s;
+    }
+    .s-btn:hover .s-label { opacity: 1; }
+
+
+    /* ─── CONTACT SECTION ────────────────────────────────────────── */
+    #section-contact {
+      width: 100%; height: 100vh;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .contact-inner {
+      max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 48px;
+    }
+    .contact-title {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 300;
+      color: var(--text-primary);
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 52px;
+    }
+    .contact-title strong { font-weight: 700; }
+    .contact-grid { display: flex; flex-direction: column; gap: 20px; }
+    .contact-row { display: grid; gap: 20px; }
+    .contact-row.row-2 { grid-template-columns: 1fr 1fr; }
+    .contact-row.row-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .c-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--glass-card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-card-bdr);
+      border-radius: 22px;
+      padding: 24px 28px;
+      text-decoration: none;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      opacity: 0;
+      transform: translateY(50px) scale(0.88);
+      transition: opacity 0.55s ease, transform 0.55s ease,
+                  background 0.22s, box-shadow 0.22s;
+    }
+    .c-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .c-card:hover {
+      background: rgba(255,255,255,0.40);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.65);
+      transform: translateY(-3px) scale(1);
+    }
+    .c-icon {
+      width: 52px; height: 52px; flex-shrink: 0;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.40);
+      border: 1px solid rgba(255,255,255,0.60);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.70);
+    }
+    .c-icon svg { width: 24px; height: 24px; color: var(--text-primary); }
+    .c-text { min-width: 0; }
+    .c-label { font-size: 11.5px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.3px; }
+    .c-value { font-size: 15px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    @media (max-width: 860px) {
+      .contact-row.row-3 { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width:700px) {
       .nav-outer { padding:12px 16px; }
       nav { padding:8px 8px 8px 20px; }
@@ -560,6 +710,7 @@
       .intro-card { padding:32px 24px; }
       .exp-card { padding:24px 24px; }
       .proj-inner { grid-template-columns: 1fr; }
+      .contact-row.row-2, .contact-row.row-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -590,6 +741,9 @@
   </div>
 </div>
 
+<!-- Floating social icons dock -->
+<div id="social-dock" aria-label="Social links"></div>
+
 <script>
 const SITE = {
   meta: {
@@ -603,6 +757,7 @@ const SITE = {
       { label: "Experience", href: "#experience" },
       { label: "Projects", href: "#projects" },
       { label: "Certifications", href: "#certifications" },
+      { label: "Contact", href: "#contact" },
     ],
     contactBtn: "Contact info",
     downloadBtn: "Download resume",
@@ -725,28 +880,38 @@ const SITE = {
     items: [
       {
         name: "Advanced Certification in Cloud Azure & DevOps",
-        org: "IIT Roorkee & Intellipaat",
-        image: "https://via.placeholder.com/300x400?text=Azure+DevOps+Cert",
+        org: "iHUB IIT Roorkee & Intellipaat",
+        image: "images/cert-7.jpeg",
       },
       {
-        name: "Cloud Application Developer",
-        org: "Rooman Technologies, IBM & NASSCOM",
-        image: "https://via.placeholder.com/300x400?text=Cloud+App+Dev",
+        name: "IBM Cloud Hosting & Auto-Scaling",
+        org: "IBM & IIT Guwahati",
+        image: "images/cert-3.jpeg",
       },
       {
-        name: "Scalable Web Hosting Using Auto-Scaling and Load Balancing",
-        org: "IBM",
-        image: "https://via.placeholder.com/300x400?text=Web+Hosting",
+        name: "Azure Administration AZ-104 / AZ-103",
+        org: "Intellipaat",
+        image: "images/cert-1.png",
+      },
+      {
+        name: "Azure DevOps",
+        org: "Intellipaat",
+        image: "images/cert-2.png",
       },
       {
         name: "Linux System Administration",
         org: "Udemy",
-        image: "https://via.placeholder.com/300x400?text=Linux+Admin",
+        image: "images/cert-6.jpeg",
       },
       {
-        name: "Jeevan Kaushal 2.0",
+        name: "Cloud Application Development",
+        org: "Rooman Technologies",
+        image: "images/cert-4.jpeg",
+      },
+      {
+        name: "Life Skills — Jeevan Kaushal 2.0",
         org: "Wadhwani Foundation",
-        image: "https://via.placeholder.com/300x400?text=Jeevan+Kaushal",
+        image: "images/cert-5.jpeg",
       },
     ],
   },
@@ -754,9 +919,16 @@ const SITE = {
     modalTitle: "Say hello",
     modalSub: "Best ways to reach me",
     links: [
-      { icon:"✉️", label:"Email", value:"your@email.com", href:"mailto:your@email.com" },
-      { icon:"💼", label:"LinkedIn", value:"linkedin.com/in/yourprofile", href:"https://linkedin.com/in/yourprofile" },
-      { icon:"🐙", label:"GitHub", value:"github.com/yourusername", href:"https://github.com/yourusername" },
+      { icon:"✉️", label:"Email", value:"shashidhar.gowda.p@outlook.com", href:"mailto:shashidhar.gowda.p@outlook.com" },
+      { icon:"💼", label:"LinkedIn", value:"shashidhar-gowda-p", href:"https://www.linkedin.com/in/shashidhar-gowda-p" },
+      { icon:"🐙", label:"GitHub", value:"p-shashidhar-gowda", href:"https://github.com/p-shashidhar-gowda" },
+    ],
+    socials: [
+      { label: "Email",      value: "shashidhar.gowda.p@outlook.com",   href: "mailto:shashidhar.gowda.p@outlook.com",         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>` },
+      { label: "Phone",     value: "+91 9019884212",                    href: "tel:+919019884212",                             icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>` },
+      { label: "LinkedIn",  value: "shashidhar-gowda-p",              href: "https://www.linkedin.com/in/shashidhar-gowda-p", icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>` },
+      { label: "GitHub",    value: "p-shashidhar-gowda",              href: "https://github.com/p-shashidhar-gowda",         icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>` },
+      { label: "Hashnode",  value: "hashnode.com/@shashidhar",         href: "https://hashnode.com/@shashidhar",              icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.351 8.019l-6.37-6.37a5.63 5.63 0 00-7.962 0l-6.37 6.37a5.63 5.63 0 000 7.962l6.37 6.37a5.63 5.63 0 007.962 0l6.37-6.37a5.63 5.63 0 000-7.962zM12 15.953a3.953 3.953 0 110-7.906 3.953 3.953 0 010 7.906z"/></svg>` },
     ],
   },
 };
@@ -786,7 +958,14 @@ function buildNav() {
   });
   linksWrap.appendChild(ul);
   const actions = mk('div','nav-actions');
-  const ghost = mk('button','btn-ghost'); ghost.textContent=n.contactBtn; ghost.onclick=()=>openModal();
+  // Contact info → scroll to Get in Touch section
+  const ghost = mk('button','btn-ghost');
+  ghost.textContent = n.contactBtn;
+  ghost.onclick = () => {
+    const panels = Array.from(document.getElementById('scroll-track').children);
+    const idx = panels.findIndex(p => p.id === 'section-contact');
+    if (idx !== -1 && window._goTo) window._goTo(idx);
+  };
   const cta = mk('a','btn-cta'); cta.href=SITE.meta.resumeFile; cta.setAttribute('download','');
   cta.innerHTML = ICON_DOWNLOAD + `<span>${n.downloadBtn}</span>`;
   actions.append(ghost, cta);
@@ -982,35 +1161,42 @@ function buildCertifications() {
   
   const grid = mk('div','cert-grid');
 
-  // Split into rows: first row = 2 items, subsequent rows = 3 items
-  function makeRow(items, rowClass) {
-    const row = mk('div', 'cert-row ' + rowClass);
-    items.forEach(cert => {
-      const item = mk('div','cert-item');
+  // Build a card with prominent image + text below
+  function makeCard(cert) {
+    const item = mk('div','cert-item');
 
-      const imgWrap = mk('div','cert-image');
-      const img = mk('img');
-      img.src = cert.image;
-      img.alt = cert.name;
-      img.onerror = function() { this.style.display='none'; imgWrap.textContent='📄'; };
-      imgWrap.appendChild(img);
+    const imgWrap = mk('div','cert-image');
+    const img = document.createElement('img');
+    img.src = cert.image;
+    img.alt = cert.name;
+    img.loading = 'lazy';
+    img.onerror = function() {
+      this.remove();
+      const ph = mk('div','cert-placeholder'); ph.textContent = '📄';
+      imgWrap.appendChild(ph);
+    };
+    imgWrap.appendChild(img);
 
-      const text = mk('div','cert-text');
-      const name = mk('div','cert-name'); name.textContent = cert.name;
-      const org  = mk('div','cert-org');  org.textContent  = cert.org;
-      text.append(name, org);
+    const text = mk('div','cert-text');
+    const name = mk('div','cert-name'); name.textContent = cert.name;
+    const org  = mk('div','cert-org');  org.textContent  = cert.org;
+    text.append(name, org);
 
-      item.append(imgWrap, text);
-      row.appendChild(item);
-    });
-    return row;
+    item.append(imgWrap, text);
+    return item;
   }
 
-  const firstTwo = c.items.slice(0, 2);
-  const rest     = c.items.slice(2);
-  grid.appendChild(makeRow(firstTwo, 'row-2'));
+  // First row: 2 cards (IIT Roorkee + IBM)
+  const row1 = mk('div','cert-row row-2');
+  c.items.slice(0, 2).forEach(cert => row1.appendChild(makeCard(cert)));
+  grid.appendChild(row1);
+
+  // Remaining rows: 3 per row
+  const rest = c.items.slice(2);
   for (let i = 0; i < rest.length; i += 3) {
-    grid.appendChild(makeRow(rest.slice(i, i + 3), 'row-3'));
+    const row = mk('div','cert-row row-3');
+    rest.slice(i, i + 3).forEach(cert => row.appendChild(makeCard(cert)));
+    grid.appendChild(row);
   }
   
   inner.append(title, grid);
@@ -1034,19 +1220,83 @@ function openModal()  { document.getElementById('contact-modal').style.display='
 function closeModal() { document.getElementById('contact-modal').style.display='none'; }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
+// ── Social dock ────────────────────────────────────────────────────────────
+function buildSocialDock() {
+  const dock = document.getElementById('social-dock');
+  SITE.contact.socials.forEach(s => {
+    const btn = mk('a', 's-btn');
+    btn.href = s.href;
+    btn.target = s.href.startsWith('mailto') || s.href.startsWith('tel') ? '_self' : '_blank';
+    btn.rel = 'noopener';
+    btn.setAttribute('aria-label', s.label);
+    // Icon on left, label on right — icon travels left as pill expands left
+    const iconWrap = mk('span', 's-icon-wrap');
+    iconWrap.innerHTML = s.icon;
+    const label = mk('span', 's-label');
+    label.textContent = s.value;
+    btn.append(iconWrap, label);
+    dock.appendChild(btn);
+  });
+}
+
+// ── Contact section ────────────────────────────────────────────────────────
+function buildContact() {
+  const s = SITE.contact;
+  const sec = mk('section'); sec.id = 'section-contact';
+  const inner = mk('div','contact-inner');
+
+  const title = mk('h2','contact-title');
+  title.innerHTML = `Get in <strong>Touch</strong>`;
+
+  const grid = mk('div','contact-grid');
+
+  const socials = s.socials;
+  // Row 1: first 2 (Email + Phone)
+  const row1 = mk('div','contact-row row-2');
+  // Row 2: remaining 3 (LinkedIn, GitHub, Hashnode)
+  const row2 = mk('div','contact-row row-3');
+
+  socials.forEach((item, idx) => {
+    const card = mk('a','c-card');
+    card.href = item.href;
+    card.target = item.href.startsWith('mailto') || item.href.startsWith('tel') ? '_self' : '_blank';
+    card.rel = 'noopener';
+    card.style.transitionDelay = `${idx * 0.08}s`;
+
+    const iconBox = mk('div','c-icon');
+    iconBox.innerHTML = item.icon;
+    const text  = mk('div','c-text');
+    const label = mk('div','c-label'); label.textContent = item.label;
+    const value = mk('div','c-value'); value.textContent = item.value;
+    text.append(label, value);
+    card.append(iconBox, text);
+
+    if (idx < 2) row1.appendChild(card);
+    else         row2.appendChild(card);
+  });
+
+  grid.append(row1, row2);
+  inner.append(title, grid);
+  sec.appendChild(inner);
+  return sec;
+}
+
 (function render() {
   document.getElementById('page-root').appendChild(buildNav());
+  buildSocialDock();
   const track = document.getElementById('scroll-track');
   const hero = buildHero();
   const intro = buildIntro();
   const experience = buildExperience();
   const projects = buildProjects();
   const certifications = buildCertifications();
+  const contact = buildContact();
   if (hero)  track.appendChild(hero);
   if (intro) track.appendChild(intro);
   if (experience) track.appendChild(experience);
   if (projects) track.appendChild(projects);
   if (certifications) track.appendChild(certifications);
+  if (contact) track.appendChild(contact);
   buildModal();
 })();
 
@@ -1058,24 +1308,73 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
   let animating = false;
   const DUR_MS = 900;
 
+  const dock = document.getElementById('social-dock');
+  const CONTACT_IDX = panels.findIndex(p => p.id === 'section-contact');
+
+  function activateContact(on) {
+    const sec = document.getElementById('section-contact');
+    const cards = sec ? sec.querySelectorAll('.c-card') : [];
+    if (on) {
+      dock.classList.add('contact-mode');
+      // Stagger cards in
+      cards.forEach(c => { c.classList.remove('visible'); });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        cards.forEach(c => c.classList.add('visible'));
+      }));
+    } else {
+      dock.classList.remove('contact-mode');
+      cards.forEach(c => c.classList.remove('visible'));
+    }
+  }
+
   function goTo(index) {
     if (index < 0 || index >= panels.length || animating) return;
     animating = true;
+    const prevIndex = current;
     current = index;
+
+    // ── Reset scroll to top so section title is always visible ─────
+    panels[index].scrollTop = 0;
 
     track.style.transform = `translateY(-${index * 100}vh)`;
 
+    // ── Heading logic ──────────────────────────────────────────────
     if (index === 0) {
-      // Hero: centered, visible
+      // Hero: always show centered. Snap instantly (no slide)
+      heading.style.transition = 'none';
       heading.classList.remove('intro-mode', 'hidden');
+      heading.getBoundingClientRect();
+      heading.style.transition = '';
+    } else if (index === 1) {
+      // Who Am I: only animate the slide when coming FORWARD from hero
+      if (prevIndex === 0) {
+        heading.classList.remove('hidden');
+        heading.classList.add('intro-mode');
+      } else {
+        // Coming backward from deeper section — keep heading hidden
+        heading.style.transition = 'none';
+        heading.classList.remove('intro-mode');
+        heading.classList.add('hidden');
+        heading.getBoundingClientRect();
+        heading.style.transition = '';
+      }
     } else {
-      // All other sections: hide heading (no slide animation)
       heading.classList.remove('intro-mode');
       heading.classList.add('hidden');
     }
 
+    // ── Contact section activation ─────────────────────────────────
+    if (index === CONTACT_IDX) {
+      activateContact(true);
+    } else {
+      activateContact(false);
+    }
+
     setTimeout(() => { animating = false; }, DUR_MS);
   }
+
+  // Expose goTo so nav Contact Info button can use it
+  window._goTo = goTo;
 
   let wheelAccum = 0;
   const WHEEL_THRESHOLD = 40;
@@ -1084,7 +1383,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
     if (animating) return;
 
     const currentPanel = panels[current];
-    if (currentPanel && (currentPanel.id === 'section-experience' || currentPanel.id === 'section-projects' || currentPanel.id === 'section-certifications')) {
+    if (currentPanel && (currentPanel.id === 'section-experience' || currentPanel.id === 'section-projects' || currentPanel.id === 'section-certifications' || currentPanel.id === 'section-contact')) {
       const isAtBottom = currentPanel.scrollHeight - currentPanel.scrollTop <= currentPanel.clientHeight + 5;
       const isAtTop = currentPanel.scrollTop <= 5;
 
