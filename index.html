@@ -12,14 +12,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:              #f3f7fa;
-      --glass-nav-bg:    rgba(255, 255, 255, 0.45);
-      --glass-nav-bdr:   rgba(255, 255, 255, 0.6);
-      --glass-blur:      blur(24px) saturate(180%);
-      --glass-card-bg:   rgba(255, 255, 255, 0.55);
-      --glass-card-bdr:  rgba(255, 255, 255, 0.7);
-      --glass-highlight: inset 0 1px 0 rgba(255,255,255,0.60), inset 0 0 0 1px rgba(255,255,255,0.10);
-      --shadow-soft:     0 12px 40px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      --bg:              #cddcea;
+      --glass-nav-bg:    rgba(255, 255, 255, 0.12);
+      --glass-nav-bdr:   rgba(255, 255, 255, 0.32);
+      --glass-blur:      blur(40px) saturate(200%) brightness(1.04);
+      --glass-card-bg:   rgba(255, 255, 255, 0.08);
+      --glass-card-bdr:  rgba(255, 255, 255, 0.28);
+      --glass-highlight: inset 0 1px 0 rgba(255,255,255,0.45), inset 0 0 0 1px rgba(255,255,255,0.06);
+      --shadow-soft:     0 8px 48px rgba(60, 80, 120, 0.08), 0 2px 8px rgba(60,80,120,0.04), var(--glass-highlight);
       --text-primary:    #121826;
       --text-secondary:  #4b5563;
       --accent:          #121826;
@@ -45,7 +45,7 @@
     .orb-6{width:200px;height:200px;background:radial-gradient(circle,#d4ecc0,#a4d480 60%,transparent);top:70%;right:20%;animation-delay:-3s}
     @keyframes drift { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(48px,-38px) scale(1.07)} 66%{transform:translate(-28px,44px) scale(0.95)} 100%{transform:translate(34px,24px) scale(1.05)} }
 
-    .nav-outer { position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;background:rgba(205,228,234,0.15);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px); }
+    .nav-outer { position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;background:transparent;backdrop-filter:none; }
     nav { display:flex;align-items:center;justify-content:space-between;background:var(--glass-nav-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-nav-bdr);border-radius:60px;padding:10px 10px 10px 28px;box-shadow:var(--shadow-soft);max-width:1400px;margin:0 auto;gap:20px; }
     #nav-brand { font-size:16.5px;font-weight:600;color:var(--text-primary);letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;text-decoration:none; }
     #nav-links { display:flex;align-items:center;flex:1;justify-content:center; }
