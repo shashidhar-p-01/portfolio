@@ -6,22 +6,25 @@
   <title>Shashidhar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --glass-nav-bg:    rgba(255,255,255,0.20);
-      --glass-nav-bdr:   rgba(255,255,255,0.40);
-      --glass-blur:      blur(24px) saturate(200%);
-      --glass-card-bg:   rgba(255,255,255,0.22);
-      --glass-card-bdr:  rgba(255,255,255,0.44);
-      --shadow-soft:     0 8px 32px rgba(0,0,0,0.10);
-      --text-primary:    #14142a;
-      --text-secondary:  rgba(20,20,42,0.62);
-      --accent:          #14142a;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg:              #f3f7fa;
+      --glass-nav-bg:    rgba(255, 255, 255, 0.45);
+      --glass-nav-bdr:   rgba(255, 255, 255, 0.6);
+      --glass-blur:      blur(24px) saturate(180%);
+      --glass-card-bg:   rgba(255, 255, 255, 0.55);
+      --glass-card-bdr:  rgba(255, 255, 255, 0.7);
+      --glass-highlight: inset 0 1px 0 rgba(255,255,255,0.60), inset 0 0 0 1px rgba(255,255,255,0.10);
+      --shadow-soft:     0 12px 40px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      --text-primary:    #121826;
+      --text-secondary:  #4b5563;
+      --accent:          #121826;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
       --nav-h: 72px;
       --h-big:   clamp(48px, 7.5vw, 92px);
       --h-small: clamp(30px, 4vw,   52px);
@@ -42,18 +45,17 @@
     .orb-6{width:200px;height:200px;background:radial-gradient(circle,#d4ecc0,#a4d480 60%,transparent);top:70%;right:20%;animation-delay:-3s}
     @keyframes drift { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(48px,-38px) scale(1.07)} 66%{transform:translate(-28px,44px) scale(0.95)} 100%{transform:translate(34px,24px) scale(1.05)} }
 
-    .nav-outer { position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;background:rgba(200,218,234,0.30);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px); }
-    nav { display:flex;align-items:center;justify-content:space-between;background:var(--glass-nav-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-nav-bdr);border-radius:60px;padding:10px 10px 10px 28px;box-shadow:var(--shadow-soft),inset 0 1px 0 rgba(255,255,255,0.55);max-width:1400px;margin:0 auto;gap:20px; }
+    .nav-outer { position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 28px;background:rgba(205,228,234,0.15);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px); }
+    nav { display:flex;align-items:center;justify-content:space-between;background:var(--glass-nav-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-nav-bdr);border-radius:60px;padding:10px 10px 10px 28px;box-shadow:var(--shadow-soft);max-width:1400px;margin:0 auto;gap:20px; }
     #nav-brand { font-size:16.5px;font-weight:600;color:var(--text-primary);letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;text-decoration:none; }
     #nav-links { display:flex;align-items:center;flex:1;justify-content:center; }
     #nav-links ul { list-style:none;display:flex;gap:2px; }
-    #nav-links a { text-decoration:none;font-size:14px;font-weight:400;color:var(--text-secondary);padding:6px 15px;border-radius:50px;transition:background .2s,color .2s;white-space:nowrap; }
-    #nav-links a:hover { background:rgba(255,255,255,0.34);color:var(--text-primary); }
+    #nav-links a { text-decoration:none;font-size:14px;font-weight:400;color:var(--text-secondary);padding:6px 15px;border-radius:50px;transition:color .2s;white-space:nowrap; }
+    #nav-links a:hover { color:var(--text-primary); }
     .nav-actions { display:flex;align-items:center;gap:8px;flex-shrink:0; }
-    .btn-ghost { background:transparent;border:none;font-size:14px;font-weight:400;color:var(--text-secondary);padding:8px 15px;border-radius:50px;cursor:pointer;font-family:var(--font);transition:background .2s,color .2s;white-space:nowrap; }
-    .btn-ghost:hover { background:rgba(255,255,255,0.34);color:var(--text-primary); }
-    .btn-cta { display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;font-size:14px;font-weight:500;padding:10px 22px;border-radius:50px;cursor:pointer;font-family:var(--font);text-decoration:none;transition:opacity .2s,transform .15s;box-shadow:0 2px 16px rgba(20,20,42,.30);white-space:nowrap; }
-    .btn-cta:hover { opacity:.86;transform:scale(1.02); }
+    .btn-ghost { background:transparent;border:none;font-size:14px;font-weight:400;color:var(--text-secondary);padding:8px 15px;border-radius:50px;cursor:pointer;font-family:var(--font);transition:color .2s;white-space:nowrap; }
+    .btn-ghost:hover { color:var(--text-primary); }
+    .btn-cta { display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;font-size:14px;font-weight:500;padding:10px 22px;border-radius:50px;cursor:pointer;font-family:var(--font);text-decoration:none;box-shadow:0 2px 16px rgba(20,20,42,.30);white-space:nowrap; }
     .btn-cta svg { width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0; }
 
     #fixed-heading {
@@ -74,7 +76,8 @@
         opacity   var(--dur) var(--ease);
     }
     #fixed-heading h1 {
-      font-weight: 300;
+      font-family: var(--font-display);
+      font-weight: 400;
       color: var(--text-primary);
       letter-spacing: -2.5px;
       line-height: 1.05;
@@ -128,7 +131,13 @@
       border: 1px solid var(--glass-card-bdr);
       border-radius: 28px;
       padding: 48px 52px;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      box-shadow: var(--shadow-soft);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .intro-card:hover {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(48px) saturate(200%);
+      -webkit-backdrop-filter: blur(48px) saturate(200%);
     }
     .intro-who-title {
       font-size: clamp(24px, 3vw, 36px);
@@ -138,8 +147,9 @@
     }
     .intro-who-title strong { font-weight: 600; }
     .intro-paragraphs { display:flex;flex-direction:column;gap:18px; }
-    .intro-paragraphs p { font-size:16.5px;color:var(--text-secondary);line-height:1.80;font-weight:400; }
+    .intro-paragraphs p { font-size:16.5px;color:var(--text-secondary);line-height:1.80;font-weight:400;transition:color .3s ease; }
     .intro-paragraphs p strong { color:var(--text-primary);font-weight:600; }
+    .intro-card:hover .intro-paragraphs p { color: rgba(20,20,42,0.80); }
 
     /* ─── EXPERIENCE ─────────────────────────────────────────────── */
     #section-experience {
@@ -213,10 +223,19 @@
       border: 1px solid var(--glass-card-bdr);
       border-radius: 22px;
       padding: 28px 32px;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      box-shadow: var(--shadow-soft);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease;
     }
-    .exp-card:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.60); }
+    .exp-card:hover { 
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(48px) saturate(200%);
+      -webkit-backdrop-filter: blur(48px) saturate(200%);
+    }
+    .exp-org { font-size:13.5px;font-weight:400;color:var(--text-secondary);margin-bottom:16px;transition:color .3s ease; }
+    .exp-card:hover .exp-org { color: rgba(20,20,42,0.75); }
+    .exp-bullets { display:flex;flex-direction:column;gap:10px;list-style:none; }
+    .exp-bullets li { display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-secondary);line-height:1.65;transition:color .3s ease; }
+    .exp-card:hover .exp-bullets li { color: rgba(20,20,42,0.75); }
 
     .exp-card-header { display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px;flex-wrap:wrap; }
     .exp-role { font-size:16px;font-weight:600;color:var(--text-primary);letter-spacing:-0.3px;line-height:1.3; }
@@ -287,17 +306,21 @@
       border: 1px solid var(--glass-card-bdr);
       border-radius: 18px;
       padding: 16px 20px;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      box-shadow: var(--shadow-soft);
       cursor: pointer;
-      transition: background 0.22s, box-shadow 0.22s, border-color 0.22s;
+      transition: background 0.3s ease;
       user-select: none;
     }
-    .proj-row:hover,
-    .proj-row.active {
-      background: rgba(255,255,255,0.36);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.65);
-      border-color: rgba(255,255,255,0.60);
+    .proj-row:hover {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(48px) saturate(200%);
+      -webkit-backdrop-filter: blur(48px) saturate(200%);
     }
+    .proj-row.active {
+      background: rgba(255,255,255,0.12);
+    }
+    .proj-desc { color: var(--text-secondary); transition: color 0.3s ease; }
+    .proj-row:hover .proj-desc { color: rgba(20,20,42,0.75); }
 
     /* icon box — glass, neutral, on-theme */
     .proj-icon-box {
@@ -364,13 +387,13 @@
     }
 
     .proj-preview-card {
-      background: rgba(255,255,255,0.26);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border: 1px solid rgba(255,255,255,0.48);
+      background: rgba(255,255,255,0.28);
+      backdrop-filter: blur(34px) saturate(220%);
+      -webkit-backdrop-filter: blur(34px) saturate(220%);
+      border: 1px solid rgba(255,255,255,0.58);
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.60);
+      box-shadow: var(--shadow-soft);
       transition: opacity 0.25s ease;
     }
     .proj-preview-card.hidden { opacity: 0; pointer-events: none; }
@@ -469,20 +492,21 @@
       border: 1px solid var(--glass-card-bdr);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      box-shadow: var(--shadow-soft);
       cursor: pointer;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transition: background 0.3s ease;
     }
     .cert-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 48px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(48px) saturate(200%);
+      -webkit-backdrop-filter: blur(48px) saturate(200%);
     }
 
     /* image area — large and prominent, full image no crop */
     .cert-image {
       width: 100%;
       aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.30);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -494,9 +518,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      transition: transform 0.35s ease;
     }
-    .cert-item:hover .cert-image img { transform: scale(1.02); }
     .cert-image .cert-placeholder {
       font-size: 36px;
       opacity: 0.5;
@@ -513,12 +535,16 @@
       color: var(--text-primary);
       line-height: 1.4;
       margin-bottom: 5px;
+      transition: color 0.3s ease;
     }
+    .cert-item:hover .cert-name { color: rgba(20,20,42,0.85); }
     .cert-org {
       font-size: 12px;
       color: var(--text-secondary);
       font-weight: 400;
+      transition: color 0.3s ease;
     }
+    .cert-item:hover .cert-org { color: rgba(20,20,42,0.70); }
 
     @media (max-width: 860px) {
       .cert-row.row-2 { grid-template-columns: 1fr 1fr; }
@@ -529,17 +555,26 @@
       .cert-row.row-3 { grid-template-columns: 1fr; }
     }
 
-    #contact-modal { display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;background:rgba(0,0,0,0.26);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px); }
-    .modal-box { position:relative;background:rgba(255,255,255,0.64);backdrop-filter:blur(34px) saturate(210%);-webkit-backdrop-filter:blur(34px) saturate(210%);border:1px solid rgba(255,255,255,0.64);border-radius:28px;padding:40px 44px;max-width:400px;width:92%;box-shadow:0 28px 70px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.74); }
-    .modal-close { position:absolute;top:20px;right:24px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-secondary);font-family:var(--font); }
-    .modal-title { font-size:22px;font-weight:600;color:var(--text-primary);letter-spacing:-.5px;margin-bottom:5px; }
-    .modal-sub   { font-size:14px;color:var(--text-secondary);margin-bottom:28px; }
-    .modal-links { display:flex;flex-direction:column;gap:12px; }
-    .modal-link  { display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text-primary);background:rgba(255,255,255,.52);border:1px solid rgba(255,255,255,.64);border-radius:16px;padding:14px 18px;transition:background .2s; }
-    .modal-link:hover { background:rgba(255,255,255,.80); }
-    .modal-link-icon  { font-size:20px;flex-shrink:0; }
-    .modal-link-label { font-size:12px;color:var(--text-secondary);margin-bottom:2px; }
-    .modal-link-val   { font-size:14.5px;font-weight:500; }
+    /* ─── GENERIC SECTION-ENTER REVEAL ───────────────────────────────
+       Applied to section titles + card-like children across all panels
+       so every section dissolves in the same way as Contact does.
+    ────────────────────────────────────────────────────────────────── */
+    .sec-reveal {
+      opacity: 0;
+      transform: translateY(26px) scale(0.97);
+      filter: blur(6px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sec-reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+
+
 
     /* ─── INTRO BLOCKS (What I Work With / Current Focus) ─── */
     .intro-block {
@@ -569,68 +604,78 @@
     /* ─── SOCIAL DOCK — slide-left dial ────────────────────────────── */
     #social-dock {
       position: fixed;
-      right: 24px;
+      right: 28px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 190;
-      width: 220px;               /* fixed so expansion doesn’t shift siblings */
+      width: 340px;               /* fixed so expansion doesn't shift siblings */
       display: flex;
       flex-direction: column;
       align-items: flex-end;      /* all buttons anchor to the right edge */
-      gap: 10px;
+      gap: 14px;
       transition: transform 0.75s cubic-bezier(0.77,0,0.175,1), opacity 0.55s ease;
     }
     #social-dock.contact-mode {
-      transform: translateY(-50%) translateX(260px);
+      transform: translateY(-50%) translateX(370px);
       opacity: 0;
       pointer-events: none;
     }
-    /* Each button expands leftward from the right edge */
+    /* Each button expands leftward from the right edge.
+       row-reverse so DOM order (icon, label) renders icon on the
+       right / label on the left — growing max-width reveals the
+       label sliding out to the LEFT while the icon stays pinned right. */
     .s-btn {
-      display: flex;
+      display: inline-flex;
+      flex-direction: row-reverse;
       align-items: center;
-      justify-content: flex-start;  /* content anchors to left so icon travels left */
-      height: 44px;
-      width: 44px;                /* collapsed = circle */
-      border-radius: 22px;
+      justify-content: flex-start;
+      height: 58px;
+      min-width: 58px;
+      width: max-content;
+      max-width: 58px;
+      border-radius: 29px;
       overflow: hidden;
       background: var(--glass-card-bg);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-card-bdr);
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      box-shadow: var(--shadow-soft);
       text-decoration: none;
       color: var(--text-primary);
       cursor: pointer;
-      transition: width 0.40s cubic-bezier(0.4, 0, 0.2, 1),
-                  background 0.22s, box-shadow 0.22s;
+      transition: max-width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  background 0.35s ease,
+                  backdrop-filter 0.35s ease,
+                  box-shadow 0.35s ease;
     }
     .s-btn:hover {
-      width: 220px;               /* expanded = pill showing the label */
-      background: rgba(255,255,255,0.50);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.70);
+      max-width: 340px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(48px) saturate(220%);
+      -webkit-backdrop-filter: blur(48px) saturate(220%);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 0 0 1px rgba(255,255,255,0.12);
     }
-    /* Icon always on the right */
     .s-icon-wrap {
-      width: 44px;
-      min-width: 44px;
-      height: 44px;
+      width: 58px;
+      min-width: 58px;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      color: var(--text-primary);
     }
-    .s-icon-wrap svg { width: 18px; height: 18px; }
-    /* Label slides in from the left as pill expands */
+    .s-icon-wrap svg { width: 24px; height: 24px; stroke: currentColor; fill: none; }
     .s-label {
-      flex: 1;
-      padding: 0 18px 0 4px;
-      font-size: 12.5px;
+      flex: 0 0 auto;
+      padding: 0 8px 0 16px;
+      font-size: 13px;
       font-weight: 500;
       white-space: nowrap;
       overflow: hidden;
       opacity: 0;
-      transition: opacity 0.18s 0.14s;
+      color: var(--text-primary);
+      transition: opacity 0.25s 0.1s ease;
     }
     .s-btn:hover .s-label { opacity: 1; }
 
@@ -654,6 +699,17 @@
       letter-spacing: -1.5px;
       line-height: 1.05;
       margin-bottom: 52px;
+      opacity: 0;
+      transform: translateY(22px) scale(0.97);
+      filter: blur(5px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .contact-title.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
     }
     .contact-title strong { font-weight: 700; }
     .contact-grid { display: flex; flex-direction: column; gap: 20px; }
@@ -672,33 +728,41 @@
       padding: 24px 28px;
       text-decoration: none;
       color: var(--text-primary);
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.55);
+      box-shadow: var(--shadow-soft);
       opacity: 0;
-      transform: translateY(50px) scale(0.88);
-      transition: opacity 0.55s ease, transform 0.55s ease,
-                  background 0.22s, box-shadow 0.22s;
+      transform: translateY(28px) scale(0.96);
+      filter: blur(6px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.3s ease;
     }
     .c-card.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
+      filter: blur(0px);
     }
     .c-card:hover {
-      background: rgba(255,255,255,0.40);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.13), inset 0 1px 0 rgba(255,255,255,0.65);
-      transform: translateY(-3px) scale(1);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(48px) saturate(200%);
+      -webkit-backdrop-filter: blur(48px) saturate(200%);
     }
     .c-icon {
       width: 52px; height: 52px; flex-shrink: 0;
       border-radius: 16px;
-      background: rgba(255,255,255,0.40);
-      border: 1px solid rgba(255,255,255,0.60);
+      background: rgba(255,255,255,0.20);
+      border: 1px solid rgba(255,255,255,0.40);
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.70);
+      transition: background 0.3s ease;
     }
+    .c-card:hover .c-icon { background: rgba(255,255,255,0.28); }
     .c-icon svg { width: 24px; height: 24px; color: var(--text-primary); }
     .c-text { min-width: 0; }
-    .c-label { font-size: 11.5px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.3px; }
-    .c-value { font-size: 15px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .c-label { font-size: 11.5px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; letter-spacing: 0.3px; transition: color 0.3s ease; }
+    .c-card:hover .c-label { color: rgba(20,20,42,0.75); }
+    .c-value { font-size: 15px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color 0.3s ease; }
+    .c-card:hover .c-value { color: rgba(20,20,42,0.95); }
 
     @media (max-width: 860px) {
       .contact-row.row-3 { grid-template-columns: 1fr 1fr; }
@@ -730,15 +794,6 @@
 
 <div id="scroll-viewport">
   <div id="scroll-track"></div>
-</div>
-
-<div id="contact-modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-    <p class="modal-title" id="modal-title-el"></p>
-    <p class="modal-sub"   id="modal-sub-el"></p>
-    <div class="modal-links" id="modal-links-el"></div>
-  </div>
 </div>
 
 <!-- Floating social icons dock -->
@@ -916,13 +971,6 @@ const SITE = {
     ],
   },
   contact: {
-    modalTitle: "Say hello",
-    modalSub: "Best ways to reach me",
-    links: [
-      { icon:"✉️", label:"Email", value:"shashidhar.gowda.p@outlook.com", href:"mailto:shashidhar.gowda.p@outlook.com" },
-      { icon:"💼", label:"LinkedIn", value:"shashidhar-gowda-p", href:"https://www.linkedin.com/in/shashidhar-gowda-p" },
-      { icon:"🐙", label:"GitHub", value:"p-shashidhar-gowda", href:"https://github.com/p-shashidhar-gowda" },
-    ],
     socials: [
       { label: "Email",      value: "shashidhar.gowda.p@outlook.com",   href: "mailto:shashidhar.gowda.p@outlook.com",         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>` },
       { label: "Phone",     value: "+91 9019884212",                    href: "tel:+919019884212",                             icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>` },
@@ -984,7 +1032,7 @@ function buildIntro() {
   const i = SITE.intro;
   const sec = mk('section'); sec.id='section-intro';
   const inner = mk('div','intro-inner');
-  const card = mk('div','intro-card');
+  const card = mk('div','intro-card sec-reveal');
 
   const whoTitle = mk('h3','intro-who-title'); whoTitle.innerHTML = i.whoTitle;
 
@@ -1004,12 +1052,13 @@ function buildExperience() {
   const sec = mk('section'); sec.id='section-experience';
   const inner = mk('div','exp-inner');
   
-  const title = mk('h2','exp-title');
+  const title = mk('h2','exp-title sec-reveal');
   title.innerHTML = `<strong>Experience</strong>`;
   
   const timeline = mk('div','exp-timeline');
-  e.items.forEach(job => {
-    const item = mk('div','exp-item');
+  e.items.forEach((job, idx) => {
+    const item = mk('div','exp-item sec-reveal');
+    item.style.transitionDelay = `${0.08 + idx * 0.08}s`;
     const dotCol = mk('div','exp-dot-col');
     const dot = mk('div','exp-dot');
     dotCol.appendChild(dot);
@@ -1069,14 +1118,15 @@ function buildProjects() {
   const sec = mk('section'); sec.id='section-projects';
   const inner = mk('div','proj-inner');
 
-  const title = mk('h2','proj-title');
+  const title = mk('h2','proj-title sec-reveal');
   title.innerHTML = `<strong>Projects</strong>`;
 
   /* ── LIST ── */
   const list = mk('div','proj-list');
 
   /* ── PREVIEW PANEL ── */
-  const preview = mk('div','proj-preview');
+  const preview = mk('div','proj-preview sec-reveal');
+  preview.style.transitionDelay = '0.15s';
   const previewCard = mk('div','proj-preview-card hidden');
 
   const previewVisual = mk('div','proj-preview-visual');
@@ -1106,7 +1156,8 @@ function buildProjects() {
   }
 
   p.items.forEach((proj, idx) => {
-    const row = mk('div','proj-row');
+    const row = mk('div','proj-row sec-reveal');
+    row.style.transitionDelay = `${idx * 0.06}s`;
     if (idx === 0) { row.classList.add('active'); showPreview(proj); }
 
     /* icon box */
@@ -1156,14 +1207,17 @@ function buildCertifications() {
   const sec = mk('section'); sec.id='section-certifications';
   const inner = mk('div','cert-inner');
   
-  const title = mk('h2','cert-title');
+  const title = mk('h2','cert-title sec-reveal');
   title.innerHTML = `<strong>Certifications</strong>`;
   
   const grid = mk('div','cert-grid');
+  let certIdx = 0;
 
   // Build a card with prominent image + text below
   function makeCard(cert) {
-    const item = mk('div','cert-item');
+    const item = mk('div','cert-item sec-reveal');
+    item.style.transitionDelay = `${certIdx * 0.06}s`;
+    certIdx++;
 
     const imgWrap = mk('div','cert-image');
     const img = document.createElement('img');
@@ -1203,22 +1257,6 @@ function buildCertifications() {
   sec.appendChild(inner);
   return sec;
 }
-
-function buildModal() {
-  const c = SITE.contact;
-  document.getElementById('modal-title-el').textContent = c.modalTitle;
-  document.getElementById('modal-sub-el').textContent   = c.modalSub;
-  const linksEl = document.getElementById('modal-links-el');
-  c.links.forEach(l => {
-    const a = mk('a','modal-link'); a.href=l.href; a.target='_blank'; a.rel='noopener';
-    a.innerHTML = `<span class="modal-link-icon" aria-hidden="true">${l.icon}</span><div><div class="modal-link-label">${l.label}</div><div class="modal-link-val">${l.value}</div></div>`;
-    linksEl.appendChild(a);
-  });
-}
-
-function openModal()  { document.getElementById('contact-modal').style.display='flex'; }
-function closeModal() { document.getElementById('contact-modal').style.display='none'; }
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
 // ── Social dock ────────────────────────────────────────────────────────────
 function buildSocialDock() {
@@ -1261,7 +1299,7 @@ function buildContact() {
     card.href = item.href;
     card.target = item.href.startsWith('mailto') || item.href.startsWith('tel') ? '_self' : '_blank';
     card.rel = 'noopener';
-    card.style.transitionDelay = `${idx * 0.08}s`;
+    card.style.transitionDelay = `${idx * 0.1}s`;
 
     const iconBox = mk('div','c-icon');
     iconBox.innerHTML = item.icon;
@@ -1297,7 +1335,6 @@ function buildContact() {
   if (projects) track.appendChild(projects);
   if (certifications) track.appendChild(certifications);
   if (contact) track.appendChild(contact);
-  buildModal();
 })();
 
 (function initScroll() {
@@ -1314,16 +1351,45 @@ function buildContact() {
   function activateContact(on) {
     const sec = document.getElementById('section-contact');
     const cards = sec ? sec.querySelectorAll('.c-card') : [];
+    const titleEl = sec ? sec.querySelector('.contact-title') : null;
+
     if (on) {
       dock.classList.add('contact-mode');
-      // Stagger cards in
-      cards.forEach(c => { c.classList.remove('visible'); });
-      requestAnimationFrame(() => requestAnimationFrame(() => {
+
+      // Stagger cards in — force reflow so it replays every visit
+      if (titleEl) { titleEl.classList.remove('visible'); void titleEl.offsetWidth; }
+      cards.forEach(c => { c.classList.remove('visible'); void c.offsetWidth; });
+      requestAnimationFrame(() => {
+        if (titleEl) titleEl.classList.add('visible');
         cards.forEach(c => c.classList.add('visible'));
-      }));
+      });
     } else {
       dock.classList.remove('contact-mode');
       cards.forEach(c => c.classList.remove('visible'));
+      if (titleEl) titleEl.classList.remove('visible');
+    }
+  }
+
+  // Generic dissolve-in reveal for any panel's .sec-reveal elements
+  // (Intro, Experience, Projects, Certifications titles/cards/rows).
+  // Forces a reflow so the animation restarts every single time the
+  // panel is entered, regardless of scroll direction.
+  function activatePanelReveal(panel, on) {
+    if (!panel) return;
+    const items = panel.querySelectorAll('.sec-reveal');
+    if (!items.length) return;
+    if (on) {
+      items.forEach(el => {
+        el.classList.remove('visible');
+        // force reflow so the browser registers the "not visible" state
+        // before we add it back — guarantees the transition replays.
+        void el.offsetWidth;
+      });
+      requestAnimationFrame(() => {
+        items.forEach(el => el.classList.add('visible'));
+      });
+    } else {
+      items.forEach(el => el.classList.remove('visible'));
     }
   }
 
@@ -1368,6 +1434,14 @@ function buildContact() {
       activateContact(true);
     } else {
       activateContact(false);
+    }
+
+    // ── Generic reveal animation for all other panels ───────────────
+    if (prevIndex !== index) {
+      activatePanelReveal(panels[prevIndex], false);
+    }
+    if (index !== CONTACT_IDX) {
+      activatePanelReveal(panels[index], true);
     }
 
     setTimeout(() => { animating = false; }, DUR_MS);
