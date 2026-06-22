@@ -432,10 +432,9 @@
     /* preview image — fully visible, no crop */
     .proj-preview-img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center top;
-      position: absolute; inset: 0;
+      height: auto;
+      display: block;
+      position: relative;
       z-index: 0;
     }
 
@@ -454,7 +453,8 @@
       backdrop-filter: blur(34px) saturate(220%);
       -webkit-backdrop-filter: blur(34px) saturate(220%);
       border: 1px solid rgba(255,255,255,0.58);
-      border-radius: 24px;
+      /* square top, rounded bottom */
+      border-radius: 0 0 24px 24px;
       overflow: hidden;
       box-shadow: var(--shadow-soft);
       transition: opacity 0.25s ease;
@@ -463,14 +463,18 @@
 
     .proj-preview-visual {
       width: 100%;
-      aspect-ratio: 16/9;
       background: #0d1117;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: flex-start; justify-content: center;
       font-size: 48px;
       position: relative;
-      overflow: hidden;
+      /* no overflow:hidden — let image show in full */
+      min-height: 80px;
     }
     /* grid overlay only shown when no image */
+    .proj-preview-visual.no-image {
+      aspect-ratio: 16/9;
+      align-items: center;
+    }
     .proj-preview-visual.no-image::after {
       content: '';
       position: absolute; inset: 0;
@@ -941,7 +945,7 @@ const SITE = {
         name: "AI Resume Analyzer",
         year: "2026",
         categories: ["AI/ML"],
-        tools: ["Python", "Gemma4", "Ollama", "Streamlit"],
+        tools: ["Python", "Gemma4", "Ollama", "Claude Sonnet 4.6"],
         description: "Local AI-powered resume analysis tool built with Streamlit and Ollama (Gemma4). Parses resumes against job descriptions and generates detailed match reports with strengths, gaps, and recommendations.",
         previewLabel: "Project Preview",
         previewDesc: "Privacy-first resume analysis running 100% locally with Ollama. Generates structured match reports with skill gap analysis, key strengths, and actionable recommendations.",
@@ -1238,10 +1242,14 @@ function buildProjects() {
 
     row.append(ghBtn, body, toolsEl, year);
 
+    row.style.cursor = 'pointer';
     row.addEventListener('mouseenter', () => {
       list.querySelectorAll('.proj-row').forEach(r => r.classList.remove('active'));
       row.classList.add('active');
       showPreview(proj);
+    });
+    row.addEventListener('click', () => {
+      if (proj.githubUrl) window.open(proj.githubUrl, '_blank', 'noopener');
     });
 
     list.appendChild(row);
